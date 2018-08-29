@@ -1,0 +1,129 @@
+running = True
+
+print('''Welcome to the prison. I shouldn't say welcome because it isn't a fun place, but here you are anyway.
+How is it here so far?' Do you like it? Well, you shouldn't. You're in a small cell. It isn't very exciting. There's stone
+walls all around you with a locked iron gate blocking your exit. There are two guards somewhere outside your cell,
+but you can't see them from here. There's a small bed on a metal stand for you to sleep. You have a plastic toothbrush
+and a small sink with a little water in it. You have a toilet and the clothes on your back, but they've both seen better days. 
+''')
+
+inventory = ["hands", "prison clothes"]
+
+def inPrisonCell():
+    inPrisonCell = True
+    numActions = 0
+    while inPrisonCell == True:
+        print("What do you do now?")
+        answer = input()
+        numActions += 1
+
+        if "inventory" in answer:
+            i = 1
+            print("In your inventory, you have: ")
+            while i <= len(inventory):
+                print(str(inventory[i-1]))
+                i += 1
+        elif "yell" in answer or "taunt" in answer or "guards" in answer:
+            print("You could do that, but I don't think the guards would appreciate the attention. Are you sure you want to?")
+            answer = input()
+            if "yes" in answer:
+                print('''The guards come over and tell you to be quiet. You see a set of keys on each of their hips. They mock 
+you a little bit, but prison has tought you to have a hard outer shell these days.''')
+                if "small knife" in inventory:
+                    print('''You use your small knife to give the guards some stabby attention. They fall over. You reach through the
+bars and grab a set of keys.''')
+                inventory.append("keys")
+            else:
+                print("Ok.")
+        elif "bed" in answer or "frame" in answer or "metal" in answer or "metal stand" in answer:
+            print('''The metal stand your bed sits on is quite durable. It's also bolted to the floor.''')
+            print("There are large nuts connecting the bed frame to the floor.")
+            if "wrench" in inventory:
+                print("You have a wrench, so you can unscrew the bed frame from the floor. Do you want to?")
+                answer = input()
+                if "yes" in answer:
+                    print("Hooray! You have a bed frame. The legs of the stand can come off, so you now have a metal pipe.")
+                    inventory.append("pipe")
+            else:
+                print("Sadly, you don't have a wrench.")
+        elif "sleep" in answer or "sit" in answer or "bed" in answer and "frame" not in answer and "stand" not in answer:
+            print('''You go over to get on the bed. How nice and relaxing in a prison cell! Everyone needs their beauty sleep.''')
+        elif "sleep" in answer:
+            print("You've slept so much already. Everything is the same here every day. Maybe it will change tomorrow.")
+        elif "toilet" in answer:
+            print("It's a toilet. It's not much more than a bowl with a hole in it. Nothing special here.")
+        elif "toothbrush" in answer:
+            if "toothbrush" in inventory:
+                print("What do you want to do with it?")
+                answer = input()
+                if "sharpen" in answer or "chisle" in answer or "knife" in answer:
+                    print("You know have a small knife.")
+                    inventory.append("small knife")
+            else:
+                print("It's a normal, plastic toothbrush. Do you want to pick it up?")
+                answer = input()
+                if "yes" in answer:
+                    print("You now have a toothbrush.")
+                    inventory.append("toothbrush")
+        elif "water" in answer:
+            print("That's all you can do? Do you have a drinking problem?")
+        elif "sink" in answer:
+            print('''You look into the drain and see something shiny. You stick your hand in and pull it out. 
+It's a wrench! In your inventory! You quietly thank the last prisoner in this cell.''')
+            inventory.append("wrench")
+        elif "pipe" in answer and "pipe" in inventory:
+            print("You bang on the cell gate. The guards come over to hush you.")
+            if "small knife" in inventory:
+                print('''You use your small knife to give the guards some stabby attention. They fall over. You reach through the
+bars and grab a set of keys.''')
+                inventory.append("keys")
+            else:
+                print("All you can do is taunt the guards. They get bored and leave.")
+        elif "keys" in answer or "unlock" in answer and "keys" in inventory:
+            print("You unlock the gate to your prison cell. Yay! You have escaped.") 
+            inPrisonCell = False
+        elif "gate" in answer or "door" in answer:
+            print("It's locked, of course. You cannot escape just yet.")
+        elif "help" in answer:
+            if "wrench" not in inventory:
+                print("Maybe you should sink about looking somewhere wet.")
+            elif "knife" not in inventory:
+                print("Sometimes toothbrushes are too sharp. Someone could get hurt!")
+            else:
+                print(" :( ")
+        else:
+            print("That's a little silly. Try something productive?")
+        if numActions > 10:
+            if "wrench" not in inventory:
+                print("Maybe you should sink about looking somewhere wet.")
+            elif "knife" not in inventory:
+                print("Sometimes toothbrushes are too sharp. Someone could get hurt!")
+            else:
+                print(" :( ")
+
+
+inPrisonCell()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
